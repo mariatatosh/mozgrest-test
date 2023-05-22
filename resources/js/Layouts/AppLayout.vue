@@ -29,13 +29,19 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <NavLink :href="route('dictionary', { lang: 'ru' })" :active="route().current('dictionary.home')">
+                                    Словарь
+                                </NavLink>
+                                <NavLink :href="route('search', { lang: 'ru' })" :active="route().current('search')">
+                                    Поиск
+                                </NavLink>
+                                <NavLink v-if="$page.props.auth.user" :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div v-if="$page.props.auth.user" class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
                                 <Dropdown align="right" width="48">
@@ -73,6 +79,24 @@ const showingNavigationDropdown = ref(false);
                             </div>
                         </div>
 
+                        <template v-else>
+                            <div class="flex items-center">
+                                <Link
+                                    :href="route('login')"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Log in
+                                </Link>
+
+                                <Link
+                                    :href="route('register')"
+                                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                >
+                                    Register
+                                </Link>
+                            </div>
+                        </template>
+
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
@@ -108,6 +132,7 @@ const showingNavigationDropdown = ref(false);
 
                 <!-- Responsive Navigation Menu -->
                 <div
+                    v-if="$page.props.auth.user"
                     :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
                     class="sm:hidden"
                 >
@@ -145,7 +170,13 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                            <slot />
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
