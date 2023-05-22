@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        ".phpstorm.meta.php",
+        "_ide_helper.php",
+        "_ide_helper_models.php"
+    ],
+    "rules": {
+        "class_attributes_separation": false
+    }
+}

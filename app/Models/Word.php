@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $lang
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Word newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Word newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Word query()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Word whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Word whereTopicId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Word whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 final class Word extends Model
@@ -39,17 +41,14 @@ final class Word extends Model
     protected $fillable = [
         'topic_id',
         'text',
-        'lang'
+        'lang',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
     protected function text(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucfirst($value),
-            set: fn(string $value) => strtolower($value),
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
         );
     }
 }

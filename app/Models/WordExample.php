@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $translation
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample query()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample whereTranslation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WordExample whereWordId($value)
+ *
  * @mixin \Eloquent
  */
 final class WordExample extends Model
@@ -38,25 +40,19 @@ final class WordExample extends Model
         'translation',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
     protected function original(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucfirst($value),
-            set: fn(string $value) => strtolower($value),
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
         );
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
     protected function translation(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucfirst($value),
-            set: fn(string $value) => strtolower($value),
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
         );
     }
 }

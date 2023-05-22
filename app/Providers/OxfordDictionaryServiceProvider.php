@@ -17,8 +17,8 @@ final class OxfordDictionaryServiceProvider extends ServiceProvider
             return new OxfordDictionaryClient(
                 new Client([
                     'base_uri' => OxfordDictionaryClient::BASE_URI,
-                    'headers'  => [
-                        'app_id'  => config('dictionary.oxford.app_id'),
+                    'headers' => [
+                        'app_id' => config('dictionary.oxford.app_id'),
                         'app_key' => config('dictionary.oxford.api_key'),
                     ],
                 ])

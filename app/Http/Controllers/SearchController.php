@@ -13,11 +13,6 @@ use Inertia\Response;
 
 final class SearchController extends Controller
 {
-    /**
-     * @param \App\Http\Requests\SearchRequest $request
-     *
-     * @return \Inertia\Response
-     */
     public function __invoke(SearchRequest $request): Response
     {
         if ($request->hasQuery()) {
@@ -26,14 +21,14 @@ final class SearchController extends Controller
             if (! $word instanceof Word) {
                 return Inertia::render('Search', ['query' => $request->getQuery()])
                     ->with('alert', [
-                        'type'    => 'error',
-                        'message' => 'Ошибка! В словаре не существует такого слова.'
+                        'type' => 'error',
+                        'message' => 'Ошибка! В словаре не существует такого слова.',
                     ]);
             }
 
             $translation = DB::table('translations as t')
                 ->select(['w.id', 'w.text'])
-                ->join('words as w', function ($join) use ($request, $word) {
+                ->join('words as w', function ($join) {
                     $join->on('w.id', '=', 't.word_id1')
                         ->orOn('w.id', '=', 't.word_id2');
                 })
@@ -47,15 +42,15 @@ final class SearchController extends Controller
             if ($translation === null) {
                 return Inertia::render('Search', ['query' => $request->getQuery()])
                     ->with('alert', [
-                        'type'    => 'error',
-                        'message' => 'Ошибка! В словаре не существует перевода для этого слова.'
+                        'type' => 'error',
+                        'message' => 'Ошибка! В словаре не существует перевода для этого слова.',
                     ]);
             }
 
             return Inertia::render('Search', [
-                'query'       => $request->getQuery(),
+                'query' => $request->getQuery(),
                 'translation' => $translation->text,
-                'examples'    => WordExample::whereWordId($translation->id)->get(['original', 'translation']),
+                'examples' => WordExample::whereWordId($translation->id)->get(['original', 'translation']),
             ]);
         }
 

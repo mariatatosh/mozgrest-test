@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $word_id1
  * @property int $word_id2
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Translation query()
  * @method static \Illuminate\Database\Eloquent\Builder|Translation whereWordId1($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Translation whereWordId2($value)
+ *
  * @mixin \Eloquent
  */
 final class Translation extends Model

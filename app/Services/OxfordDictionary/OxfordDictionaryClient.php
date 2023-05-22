@@ -14,10 +14,8 @@ final class OxfordDictionaryClient
 
     private const ENDPOINT_TRANSLATIONS = 'translations';
 
-    /** @var string|null */
     private ?string $sourceLang;
 
-    /** @var string|null */
     private ?string $targetLang;
 
     public function __construct(private readonly ClientInterface $client)
@@ -27,8 +25,6 @@ final class OxfordDictionaryClient
     }
 
     /**
-     * @param string $lang
-     *
      * @return $this
      */
     public function setSourceLang(string $lang): self
@@ -41,8 +37,6 @@ final class OxfordDictionaryClient
     }
 
     /**
-     * @param string $lang
-     *
      * @return $this
      */
     public function setTargetLang(string $lang): self
@@ -55,9 +49,8 @@ final class OxfordDictionaryClient
     }
 
     /**
-     * @param string $word
-     *
      * @return \App\Services\OxfordDictionary\TranslationParser
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function translate(string $word): TranslationParser
