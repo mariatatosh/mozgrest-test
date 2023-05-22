@@ -14,7 +14,7 @@ const props = defineProps({
         type: String,
         default: null,
     },
-    sentences: {
+    examples: {
         type: Array,
         default: null,
     },
@@ -77,11 +77,11 @@ function submit() {
                 <h4 class="font-bold dark:text-white">Примеры</h4>
 
                 <p
-                    v-for="(sentence, index) in sentences"
+                    v-for="(example, index) in examples"
                     :key="index"
                     class="rounded p-4 my-4 border-l-4 border-gray-300 border bg-gray-50 dark:border-gray-500 dark:bg-gray-800"
                 >
-                    {{ sentence }}
+                    <span class="font-bold">{{ example.original }}</span> — {{ example.translation }}
                 </p>
             </div>
         </div>

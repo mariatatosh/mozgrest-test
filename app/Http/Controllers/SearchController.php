@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
-use App\Models\Translation;
 use App\Models\Word;
-use App\Models\WordSentence;
+use App\Models\WordExample;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -56,7 +55,7 @@ final class SearchController extends Controller
             return Inertia::render('Search', [
                 'query'       => $request->getQuery(),
                 'translation' => $translation->text,
-                'sentences'   => WordSentence::whereWordId($translation->id)->pluck('text'),
+                'examples'    => WordExample::whereWordId($translation->id)->get(['original', 'translation']),
             ]);
         }
 

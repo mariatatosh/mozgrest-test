@@ -35,5 +35,9 @@ final class Word extends Model
     public const LANGUAGE_RU = 'ru';
     public const LANGUAGE_ES = 'es';
 
-    protected $fillable = ['text', 'lang'];
+    protected $fillable = [
+        'topic_id',
+        'text',
+        'lang'
+    ];
 }

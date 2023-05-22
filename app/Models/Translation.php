@@ -23,5 +23,7 @@ final class Translation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['word_id1', 'word_id2'];
+
     public $timestamps = false;
 }
