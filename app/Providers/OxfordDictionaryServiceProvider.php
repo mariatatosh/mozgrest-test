@@ -18,8 +18,8 @@ final class OxfordDictionaryServiceProvider extends ServiceProvider
                 new Client([
                     'base_uri' => OxfordDictionaryClient::BASE_URI,
                     'headers' => [
-                        'app_id' => config('dictionary.oxford.app_id'),
-                        'app_key' => config('dictionary.oxford.api_key'),
+                        'app_id' => config('oxford-dictionary.app_id'),
+                        'app_key' => config('oxford-dictionary.api_key'),
                     ],
                 ])
             );
