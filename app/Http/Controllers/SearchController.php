@@ -7,12 +7,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SearchRequest;
 use App\Models\Word;
 use App\Models\WordExample;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\TranslationRepository;
 use Inertia\Inertia;
 use Inertia\Response;
 
 final class SearchController extends Controller
 {
+    public function __construct(private readonly TranslationRepository $translations)
+    {
+    }
+
     public function __invoke(SearchRequest $request): Response
     {
         if ($request->hasQuery()) {
@@ -26,18 +30,7 @@ final class SearchController extends Controller
                     ]);
             }
 
-            $translation = DB::table('translations as t')
-                ->select(['w.id', 'w.text'])
-                ->join('words as w', function ($join) {
-                    $join->on('w.id', '=', 't.word_id1')
-                        ->orOn('w.id', '=', 't.word_id2');
-                })
-                ->where('w.lang', '=', $request->getLang())
-                ->where(function ($query) use ($word) {
-                    $query->where('t.word_id1', '=', $word->id)
-                        ->orWhere('t.word_id2', '=', $word->id);
-                })
-                ->first();
+            $translation = $this->translations->findByWordIdAndLang($word->id, $request->getLang());
 
             if ($translation === null) {
                 return Inertia::render('Search', ['query' => $request->getQuery()])
