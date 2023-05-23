@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
 use App\Models\Word;
-use App\Models\WordExample;
 use App\Repositories\TranslationRepository;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -43,7 +42,7 @@ final class SearchController extends Controller
             return Inertia::render('Search', [
                 'query' => $request->getQuery(),
                 'translation' => $translation->text,
-                'examples' => WordExample::whereWordId($translation->id)->get(['original', 'translation']),
+                'examples' => $translation->examples->pluck(['original', 'translation']),
             ]);
         }
 
