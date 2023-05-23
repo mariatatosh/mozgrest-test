@@ -21,6 +21,10 @@ Start the local development server in first time
 
     make init
 
+Load default dictionary data
+
+    ./vendor/bin/sail php artisan app:load-default-dictionary
+
 You can now access the server at http://localhost
 
 **TL;DR command list**
@@ -28,5 +32,6 @@ You can now access the server at http://localhost
     git clone git@github.com:mariatatosh/mozgrest-test.git && cd mozgrest-test
     make copy-env
     make init
+    ./vendor/bin/sail php artisan app:load-default-dictionary
 
 ----------

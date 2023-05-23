@@ -1,6 +1,6 @@
 SAIL=./vendor/bin/sail
 
-init: install-sail up npm-install generate-keys migrate load-default-dictionary npm-dev
+init: install-sail up npm-install generate-keys migrate npm-dev
 start: up npm-dev
 
 up:
@@ -35,6 +35,3 @@ generate-keys:
 
 unit-tests:
 	$(SAIL) artisan test --testsuite=Unit
-
-load-default-dictionary:
-	$(SAIL) artisan app:load-default-dictionary
