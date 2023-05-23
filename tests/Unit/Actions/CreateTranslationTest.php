@@ -36,8 +36,8 @@ final class CreateTranslationTest extends TestCase
         $this->assertEquals($word2->id, $translation->word_id2);
 
         $this->assertDatabaseHas('translations', [
-           'word_id1' => $word1->id,
-           'word_id2' => $word2->id,
+            'word_id1' => $word1->id,
+            'word_id2' => $word2->id,
         ]);
     }
 

@@ -19,7 +19,7 @@ final class CreateWordExampleTest extends TestCase
     public function test_success(): void
     {
         $topic = Topic::factory()->create(['name' => 'topic-1']);
-        $word  = Word::factory()->create(['topic_id' => $topic->id, 'text' => 'word-1', 'lang' => Word::LANGUAGE_EN]);
+        $word = Word::factory()->create(['topic_id' => $topic->id, 'text' => 'word-1', 'lang' => Word::LANGUAGE_EN]);
 
         $example = (new CreateWordExampleAction())->handle(
             new CreateWordExampleInput(
@@ -34,8 +34,8 @@ final class CreateWordExampleTest extends TestCase
         $this->assertEquals(ucfirst($translationText), $example->translation);
 
         $this->assertDatabaseHas('word_examples', [
-            'word_id'     => $word->id,
-            'original'    => $originalText,
+            'word_id' => $word->id,
+            'original' => $originalText,
             'translation' => $translationText,
         ]);
     }
