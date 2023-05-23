@@ -14,11 +14,13 @@ final class DictionaryController extends Controller
     {
         $topics = Topic::with('words')->get();
 
-        $wordGroups = $topics->map(fn (Topic $topic) => $topic->words->where('lang', $lang)->pluck('text'));
+        $wordGroups = $topics
+            ->map(fn (Topic $topic) => $topic->words->where('lang', $lang)->pluck('text'))
+            ->toArray();
 
         return Inertia::render('Dictionary', [
             'topics' => $topics->pluck('name'),
-            'wordGroups' => array_map(null, ...$wordGroups->toArray()),
+            'wordGroups' => ! empty($wordGroups) ? array_map(null, ...$wordGroups) : [],
         ]);
     }
 }
