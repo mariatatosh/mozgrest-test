@@ -1,6 +1,6 @@
 SAIL=./vendor/bin/sail
 
-init: install-sail npm-install generate-keys migrate start
+init: install-sail up npm-install generate-keys migrate npm-dev
 start: up npm-dev
 
 up:
