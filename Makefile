@@ -32,3 +32,6 @@ copy-env:
 
 generate-keys:
 	$(SAIL) artisan key:generate
+
+unit-tests:
+	$(SAIL) artisan test --testsuite=Unit
