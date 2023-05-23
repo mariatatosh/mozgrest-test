@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Actions\CreateTopic\CreateTopicAction;
+use App\Actions\CreateTopic\CreateTopicInput;
 use App\Actions\CreateTranslation\CreateTranslationAction;
 use App\Actions\CreateTranslation\CreateTranslationInput;
 use App\Actions\CreateWord\CreateWordAction;
@@ -23,7 +25,7 @@ return new class extends Migration
         ];
 
         foreach ($topics as $topic => $words) {
-            $topic = Topic::create(['name' => $topic]);
+            $topic = app(CreateTopicAction::class)->handle(new CreateTopicInput($topic));
 
             foreach ($words as $word) {
                 /** @var \App\Models\Word $sourceWord */

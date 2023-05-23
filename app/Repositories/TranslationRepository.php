@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Models\Translation;
 use App\Models\Word;
 use Illuminate\Support\Facades\DB;
 
@@ -25,5 +26,10 @@ final class TranslationRepository
             ->value('id');
 
         return Word::find($id);
+    }
+
+    public function exists(int $wordId1, int $wordId2): bool
+    {
+        return Translation::whereWordId1($wordId1)->whereWordId2($wordId2)->exists();
     }
 }
