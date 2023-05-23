@@ -42,7 +42,7 @@ final class SearchController extends Controller
             return Inertia::render('Search', [
                 'query' => $request->getQuery(),
                 'translation' => $translation->text,
-                'examples' => $translation->examples->pluck(['original', 'translation']),
+                'examples' => $translation->examples()->get(['original', 'translation'])
             ]);
         }
 
