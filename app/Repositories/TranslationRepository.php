@@ -8,7 +8,7 @@ use App\Models\Translation;
 use App\Models\Word;
 use Illuminate\Support\Facades\DB;
 
-final class TranslationRepository
+class TranslationRepository
 {
     public function findByWordIdAndLang(int $wordId, string $lang): ?Word
     {

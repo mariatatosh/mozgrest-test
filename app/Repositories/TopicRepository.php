@@ -6,7 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Topic;
 
-final class TopicRepository
+class TopicRepository
 {
     public function exists(string $name): bool
     {

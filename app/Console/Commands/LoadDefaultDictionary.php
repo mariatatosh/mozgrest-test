@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Console\Commands;
+
 use App\Actions\CreateTopic\CreateTopicAction;
 use App\Actions\CreateTopic\CreateTopicInput;
 use App\Actions\CreateTranslation\CreateTranslationAction;
@@ -10,14 +12,15 @@ use App\Actions\CreateWord\CreateWordAction;
 use App\Actions\CreateWord\CreateWordInput;
 use App\Actions\CreateWordExample\CreateWordExampleAction;
 use App\Actions\CreateWordExample\CreateWordExampleInput;
-use App\Models\Topic;
 use App\Models\Word;
 use App\Services\OxfordDictionary\OxfordDictionaryClient;
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Console\Command;
 
-return new class extends Migration
+final class LoadDefaultDictionary extends Command
 {
-    public function up(): void
+    protected $signature = 'app:load-default-dictionary';
+
+    public function handle(): int
     {
         $topics = [
             'food' => ['banana', 'bread', 'egg', 'fish'],
@@ -43,12 +46,8 @@ return new class extends Migration
                 $this->createTranslation($targetWordRu->id, $targetWordEs->id);
             }
         }
-    }
 
-    public function down(): void
-    {
-        Word::truncate();
-        Topic::truncate();
+        return 1;
     }
 
     private function createWord(Word $sourceWord, int $topicId, string $lang): Word
@@ -93,4 +92,4 @@ return new class extends Migration
             );
         }
     }
-};
+}
