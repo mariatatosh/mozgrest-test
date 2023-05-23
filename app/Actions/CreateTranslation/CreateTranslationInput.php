@@ -10,17 +10,11 @@ final class CreateTranslationInput
     {
     }
 
-    /**
-     * @return int
-     */
     public function getWordId1(): int
     {
         return $this->wordId1;
     }
 
-    /**
-     * @return int
-     */
     public function getWordId2(): int
     {
         return $this->wordId2;

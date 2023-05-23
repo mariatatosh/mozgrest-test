@@ -10,9 +10,6 @@ final class CreateTopicInput
     {
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
